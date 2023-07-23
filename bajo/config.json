@@ -1,0 +1,4 @@
+{
+  "alias": "couchdb",
+  "dependencies": ["bajo-db"]
+}
