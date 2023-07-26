@@ -1,7 +1,8 @@
 import nano from 'nano'
 import createDb from '../../lib/create-db.js'
+import collExists from '../method/coll-exists.js'
 
-async function instancing ({ connection, schemas, noRebuild }) {
+async function instantiation ({ connection, schemas, noRebuild }) {
   const { importPkg, log } = this.bajo.helper
   const { pick } = await importPkg('lodash-es')
   this.bajoDbCouchdb.instances = this.bajoDbCouchdb.instances || []
@@ -16,13 +17,14 @@ async function instancing ({ connection, schemas, noRebuild }) {
   this.bajoDbCouchdb.instances.push(instance)
   if (noRebuild) return
   for (const schema of schemas) {
+    const exists = await collExists.call(this, schema)
+    if (exists) continue
     try {
-      await instance.client.db.get(schema.collName)
+      await createDb.call(this, { instance, schema, connection })
     } catch (err) {
-      if (err.statusCode === 404) await createDb.call(this, { instance, schema, connection })
-      else log.error('Error on \'%s\': %s', connection.name, err.message)
+      log.error('Error on \'%s\': %s', connection.name, err.message)
     }
   }
 }
 
-export default instancing
+export default instantiation
