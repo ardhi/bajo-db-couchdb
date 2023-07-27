@@ -2,7 +2,7 @@ async function getRecord ({ schema, id, options = {} } = {}) {
   const { error } = this.bajo.helper
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
-  const { thrownNotFound = true } = options
+  const { thrownNotFound = true, dataOnly } = options
   const coll = instance.client.use(schema.collName)
   let result
   try {
@@ -10,7 +10,7 @@ async function getRecord ({ schema, id, options = {} } = {}) {
   } catch (err) {
     if (thrownNotFound) throw error('Record \'%s@%s\' not found!', id, schema.name)
   }
-  return result
+  return dataOnly ? result : { data: result, rev: result._rev }
 }
 
 export default getRecord
