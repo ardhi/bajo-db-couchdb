@@ -3,11 +3,10 @@ import getRecord from './get-record.js'
 async function removeRecord ({ schema, id, options = {} } = {}) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
-  const { thrownNotFound = true } = options
-  const rec = await getRecord.call(this, { schema, id, options: { thrownNotFound, dataOnly: false } })
+  const rec = await getRecord.call(this, { schema, id, options: { thrownNotFound: true } })
   const coll = instance.client.use(schema.collName)
-  await coll.destroy(id, rec._rev)
-  return { old: rec.data, oldRev: rec.rev }
+  const resp = await coll.destroy(id, rec._rev)
+  return { old: rec.data, oldRev: rec.rev, newRev: resp._rev }
 }
 
 export default removeRecord
