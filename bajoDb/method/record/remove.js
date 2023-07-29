@@ -1,6 +1,6 @@
-import getRecord from './get-record.js'
+import getRecord from './get.js'
 
-async function removeRecord ({ schema, id, options = {} } = {}) {
+async function remove ({ schema, id, options = {} } = {}) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
   const rec = await getRecord.call(this, { schema, id, options: { thrownNotFound: true } })
@@ -9,4 +9,4 @@ async function removeRecord ({ schema, id, options = {} } = {}) {
   return { old: rec.data, oldRev: rec.rev, newRev: resp._rev }
 }
 
-export default removeRecord
+export default remove

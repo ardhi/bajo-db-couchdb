@@ -1,6 +1,6 @@
 import nano from 'nano'
-import createDb from '../../lib/create-db.js'
-import collExists from '../method/coll-exists.js'
+import collCreate from '../method/coll/create.js'
+import collExists from '../method/coll/exists.js'
 
 async function instantiation ({ connection, schemas, noRebuild }) {
   const { importPkg, log } = this.bajo.helper
@@ -20,7 +20,7 @@ async function instantiation ({ connection, schemas, noRebuild }) {
     const exists = await collExists.call(this, schema)
     if (exists) continue
     try {
-      await createDb.call(this, { instance, schema, connection })
+      await collCreate.call(this, schema)
     } catch (err) {
       log.error('Error on \'%s\': %s', connection.name, err.message)
     }

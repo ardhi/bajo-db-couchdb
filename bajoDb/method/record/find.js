@@ -1,4 +1,4 @@
-async function findRecord ({ schema, filter = {}, options = {} } = {}) {
+async function find ({ schema, filter = {}, options = {} } = {}) {
   const { importPkg } = this.bajo.helper
   const { forOwn, set, map } = await importPkg('lodash-es')
   const { getInfo } = this.bajoDb.helper
@@ -23,4 +23,4 @@ async function findRecord ({ schema, filter = {}, options = {} } = {}) {
   return { data: resp.docs, page, limit, count, pages: Math.ceil(count / limit), revs }
 }
 
-export default findRecord
+export default find

@@ -1,4 +1,4 @@
-async function collExists (schema) {
+async function exists (schema) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
   try {
@@ -9,4 +9,4 @@ async function collExists (schema) {
   return true
 }
 
-export default collExists
+export default exists

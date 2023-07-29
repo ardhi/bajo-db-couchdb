@@ -1,6 +1,6 @@
-import getRecord from './get-record.js'
+import getRecord from './get.js'
 
-async function updateRecord ({ schema, id, body, options } = {}) {
+async function update ({ schema, id, body, options } = {}) {
   const { importPkg } = this.bajo.helper
   const { getInfo } = this.bajoDb.helper
   const { merge, omit } = await importPkg('lodash-es')
@@ -12,4 +12,4 @@ async function updateRecord ({ schema, id, body, options } = {}) {
   return { old: old.data, oldRev: old.rev, new: result.data, newRev: result.rev }
 }
 
-export default updateRecord
+export default update
