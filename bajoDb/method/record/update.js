@@ -9,7 +9,7 @@ async function update ({ schema, id, body, options } = {}) {
   const coll = instance.client.use(schema.collName)
   await coll.insert(merge({ _id: old.data._id, _rev: old.data._rev }, omit(old.data, ['_id', '_rev']), body))
   const result = await getRecord.call(this, { schema, id, options: { thrownNotFound: true } })
-  return { old: old.data, oldRev: old.rev, new: result.data, newRev: result.rev }
+  return { oldData: old.data, oldRev: old.rev, data: result.data, rev: result.rev }
 }
 
 export default update
