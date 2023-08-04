@@ -3,7 +3,7 @@ async function get ({ schema, id, options = {} } = {}) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
   const { thrownNotFound } = options
-  const coll = instance.client.use(schema.collName)
+  const coll = instance.client.use(schema.repoName)
   let result
   try {
     result = await coll.get(id)

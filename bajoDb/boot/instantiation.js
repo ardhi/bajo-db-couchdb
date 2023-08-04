@@ -1,6 +1,6 @@
 import nano from 'nano'
-import collCreate from '../method/coll/create.js'
-import collExists from '../method/coll/exists.js'
+import repoCreate from '../method/repo/create.js'
+import repoExists from '../method/repo/exists.js'
 
 async function instantiation ({ connection, schemas, noRebuild }) {
   const { importPkg, log } = this.bajo.helper
@@ -17,10 +17,10 @@ async function instantiation ({ connection, schemas, noRebuild }) {
   this.bajoDbCouchdb.instances.push(instance)
   if (noRebuild) return
   for (const schema of schemas) {
-    const exists = await collExists.call(this, schema)
+    const exists = await repoExists.call(this, schema)
     if (exists) continue
     try {
-      await collCreate.call(this, schema)
+      await repoCreate.call(this, schema)
     } catch (err) {
       log.error('Error on \'%s\': %s', connection.name, err.message)
     }
