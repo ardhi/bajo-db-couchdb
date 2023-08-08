@@ -8,7 +8,7 @@ async function get ({ schema, id, options = {} } = {}) {
   try {
     result = await coll.get(id)
   } catch (err) {
-    if (thrownNotFound) throw error('Record \'%s@%s\' not found!', id, schema.name)
+    if (thrownNotFound) throw error('Record \'%s@%s\' not found!', id, schema.name, { statusCode: 404 })
     throw err
   }
   return { data: result, rev: result._rev }
