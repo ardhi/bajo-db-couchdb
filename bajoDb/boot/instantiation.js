@@ -5,7 +5,7 @@ import repoExists from '../method/repo/exists.js'
 async function instantiation ({ connection, schemas, noRebuild }) {
   const { importPkg, log } = this.bajo.helper
   const { pick } = await importPkg('lodash-es')
-  this.bajoDbCouchdb.instances = this.bajoDbCouchdb.instances || []
+  this.bajoDbCouchdb.instances = this.bajoDbCouchdb.instances ?? []
   const instance = pick(connection, ['name', 'type'])
   let url = connection.url
   if (!url) {
