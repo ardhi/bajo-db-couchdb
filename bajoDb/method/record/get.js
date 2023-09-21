@@ -11,7 +11,7 @@ async function get ({ schema, id, options = {} } = {}) {
     if (thrownNotFound) throw error('Record \'%s@%s\' not found!', id, schema.name, { statusCode: 404 })
     throw err
   }
-  return { data: result, rev: result._rev }
+  return { data: result, rev: result ? result._rev : null }
 }
 
 export default get
