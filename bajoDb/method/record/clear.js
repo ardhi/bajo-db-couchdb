@@ -1,5 +1,5 @@
-import create from '../repo/create.js'
-import drop from '../repo/drop.js'
+import create from '../coll/create.js'
+import drop from '../coll/drop.js'
 
 async function clear ({ schema, options = {} } = {}) {
   await drop.call(this, schema)

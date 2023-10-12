@@ -6,7 +6,7 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const { prepPagination } = this.bajoDb.helper
   const { limit, skip, query, sort, page } = await prepPagination(filter, schema)
   const selector = query ?? {}
-  const coll = instance.client.use(schema.repoName)
+  const coll = instance.client.use(schema.collName)
   const sorts = []
   forOwn(sort, (v, k) => {
     sorts.push(set({}, k, v < 0 ? 'desc' : 'asc'))
