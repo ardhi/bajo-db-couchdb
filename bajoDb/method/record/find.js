@@ -1,9 +1,10 @@
 async function find ({ schema, filter = {}, options = {} } = {}) {
   const { importPkg } = this.bajo.helper
-  const { forOwn, set, map } = await importPkg('lodash-es')
+  const { forOwn, set, map, omit } = await importPkg('lodash-es')
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
   const { prepPagination } = this.bajoDb.helper
+  const { noCount } = options
   const { limit, skip, query, sort, page } = await prepPagination(filter, schema)
   const selector = query ?? {}
   const coll = instance.client.use(schema.collName)
@@ -20,7 +21,9 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const resp = await coll.find(q)
   const count = 0 // couchdb doesn't support this
   const revs = map(resp.docs, '_rev')
-  return { data: resp.docs, page, limit, count, pages: Math.ceil(count / limit), revs }
+  let result = { data: resp.docs, page, limit, count, pages: Math.ceil(count / limit), revs }
+  if (noCount) result = omit(result, ['count', 'pages'])
+  return result
 }
 
 export default find
