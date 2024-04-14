@@ -4,7 +4,6 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
   const { prepPagination } = this.bajoDb.helper
-  const { noCount } = options
   const { limit, skip, query, sort, page } = await prepPagination(filter, schema)
   const selector = query ?? {}
   const coll = instance.client.use(schema.collName)
@@ -22,7 +21,7 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const count = 0 // couchdb doesn't support this
   const revs = map(resp.docs, '_rev')
   let result = { data: resp.docs, page, limit, count, pages: Math.ceil(count / limit), revs }
-  if (noCount) result = omit(result, ['count', 'pages'])
+  if (options.count) result = omit(result, ['count', 'pages'])
   return result
 }
 
