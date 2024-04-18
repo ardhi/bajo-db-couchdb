@@ -2,7 +2,7 @@ import getRecord from './get.js'
 
 async function create ({ schema, body, options = {} } = {}) {
   const { getInfo } = this.bajoDb.helper
-  const { instance } = await getInfo(schema)
+  const { instance } = getInfo(schema)
   const { noResult } = options
   const bodyId = body.id
   delete body.id

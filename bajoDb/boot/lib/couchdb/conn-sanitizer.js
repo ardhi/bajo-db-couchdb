@@ -1,6 +1,5 @@
 async function connSanitizer (conn) {
-  const { importPkg } = this.bajo.helper
-  const { cloneDeep } = await importPkg('lodash-es')
+  const { cloneDeep } = this.bajo.helper._
   if (!conn.url) {
     conn.proto = conn.proto ?? 'http'
     conn.host = conn.host ?? 'localhost'

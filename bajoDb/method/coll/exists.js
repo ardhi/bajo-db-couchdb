@@ -1,6 +1,6 @@
 async function exists (schema) {
   const { getInfo } = this.bajoDb.helper
-  const { instance } = await getInfo(schema)
+  const { instance } = getInfo(schema)
   try {
     await instance.client.db.get(schema.collName)
   } catch (err) {
