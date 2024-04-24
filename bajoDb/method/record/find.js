@@ -3,8 +3,8 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = getInfo(schema)
   const { prepPagination } = this.bajoDb.helper
-  const { limit, skip, query, sort, page } = await prepPagination(filter, schema)
-  const selector = query ?? {}
+  const { limit, skip, sort, page } = await prepPagination(filter, schema)
+  const selector = options.query ?? {}
   const coll = instance.client.use(schema.collName)
   const sorts = []
   forOwn(sort, (v, k) => {
