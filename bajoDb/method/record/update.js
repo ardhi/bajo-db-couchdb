@@ -2,8 +2,8 @@ import getRecord from './get.js'
 
 async function update ({ schema, id, body, options } = {}) {
   const { noResult } = options
-  const { getInfo } = this.bajoDb.helper
-  const { merge, omit } = this.bajo.helper._
+  const { getInfo } = this.app.bajoDb
+  const { merge, omit } = this.app.bajo.lib._
   const { instance } = getInfo(schema)
   const old = noResult ? undefined : await getRecord.call(this, { schema, id, options: { thrownNotFound: true } })
   const coll = instance.client.use(schema.collName)

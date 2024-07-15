@@ -1,6 +1,6 @@
 {
   "name": "bajo-db-couchdb",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "Bajo DB CouchDB driver for Bajo Framework",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/ardhi/bajo-db-couchdb#readme",
   "dependencies": {
-    "nano": "^10.1.2"
+    "nano": "^10.1.3"
   }
 }

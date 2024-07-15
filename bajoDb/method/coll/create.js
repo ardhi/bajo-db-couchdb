@@ -1,5 +1,5 @@
 async function create ({ schema, options = {} }) {
-  const { getInfo } = this.bajoDb.helper
+  const { getInfo } = this.app.bajoDb
   const { instance } = getInfo(schema)
   await instance.client.db.create(schema.collName)
   const coll = instance.client.use(schema.collName)

@@ -1,5 +1,5 @@
 async function exists ({ schema, options }) {
-  const { getInfo } = this.bajoDb.helper
+  const { getInfo } = this.app.bajoDb
   const { instance } = getInfo(schema)
   try {
     await instance.client.db.get(schema.collName)
