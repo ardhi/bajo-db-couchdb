@@ -6,7 +6,7 @@ Plugin name: **bajoDbCouchdb**, alias: **couchdb**
 
 > <br />**Attention**: I do NOT accept any pull request at the moment, thanks!<br /><br />
 
-CouchDB support for [Bajo Framework](https://github.com/ardhi/bajo). Requires [Bajo DB](https://github.com/ardhi/bajo-db)
+CouchDB driver for [Bajo Framework](https://github.com/ardhi/bajo). Requires [Bajo DB](https://github.com/ardhi/bajo-db)
 
 ## Installation
 
